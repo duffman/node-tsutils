@@ -17,7 +17,18 @@
  =----------------------------------------------------------------= */
 
 export class PStrUtils {
-	public static isEmpty(str: string) {
+	/**
+	 * Returns a string of a given length filled with given char value
+	 * @param {string} char
+	 * @returns {string}
+	 */
+	public static fillChar(charValue: string, length: number): string {
+		let result: string = "";
+		for (let i = 0; i < length; i++) { result += charValue; }
+		return result;
+	}
+
+	public static isEmpty(str: string): boolean {
 		return (str === undefined) || (!str || 0 === str.length);
 	}
 
