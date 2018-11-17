@@ -16,22 +16,10 @@
 
  =----------------------------------------------------------------= */
 
-//import * as Collections from 'typescript-collections';
+export class PVarUtils {
 
-export class KeyValueStore {
-/*	public dict = new Collections.Dictionary<string, any>();
-
-	public add(key: string, value: any) {
-		this.dict.setValue(key, value);
+	public static isNothing(value: any): boolean {
+		return value ? true: false;
 	}
 
-	public getAsStr(key: string): string {
-		let strValalue: string = "";
-		let value = this.dict.getValue(key);
-		if (value instanceof String) {
-			strValalue = value as string;
-		}
-		return strValalue;
-	}
-	*/
 }
