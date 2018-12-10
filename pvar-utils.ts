@@ -16,10 +16,91 @@
 
  =----------------------------------------------------------------= */
 
-export class PVarUtils {
+import {PValueTypeNames, PVarType, PVarTypeToStr} from '@putte/pvar-types';
 
-	public static isNothing(value: any): boolean {
+const UNDEF = undefined;
+
+export class PVarUtils {
+	public static isBoolFalse(value: any): boolean {
 		return value ? true: false;
 	}
 
+	public static checkTypeOf(value: any): PVarType {
+		let result = PVarType.Unknown;
+		let instName = typeof value;
+
+		switch (instName) {
+			case PValueTypeNames.String:
+				result = PVarType.String;
+				break;
+			case PValueTypeNames.Number:
+				result = PVarType.Number;
+				break;
+			case PValueTypeNames.Bool:
+				result = PVarType.Bool;
+				break;
+			case PValueTypeNames.Object:
+				result = PVarType.Object;
+				break;
+			default:
+				result = PVarType.Unknown;
+				break;
+		}
+
+		return result;
+	}
+
+	public static getRefType(value: any): PVarType {
+		let result = PVarUtils.checkTypeOf(value);
+
+		if (result === PVarType.Object) {
+			if (value == null) {
+				result = PVarType.Null;
+			}
+
+			if (value == UNDEF) {
+				result = PVarType.Null;
+			}
+
+			if (value instanceof Array) {
+				result = PVarType.Array;
+			}
+
+			if (value instanceof String) {
+				result = PVarType.String;
+			}
+
+			if (value instanceof Number) {
+				result = PVarType.Number;
+			}
+
+			if (value instanceof Boolean) {
+				result = PVarType.Bool;
+			}
+		}
+
+		return result;
+	}
+
+	/**
+	 * Convenience that checks both Val and Ref types
+	 * @param value
+	 * @returns {PVarType}
+	 */
+	public static getVarType(value: any): PVarType {
+		let result = PVarUtils.checkTypeOf(value);
+
+		// In case this was a value type, check the instance type
+		if (result == PVarType.Object) {
+			result = PVarUtils.getRefType(value);
+		}
+
+		//console.log("\n\n### getVarType :: ", PVarTypeToStr(result) + "\n\n");
+
+		return result;
+	}
+
+	public static noValue(input: any): boolean {
+		return false;
+	}
 }
