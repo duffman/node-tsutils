@@ -32,6 +32,11 @@ export class PStrUtils {
 		return (str === undefined) || (!str || 0 === str.length);
 	}
 
+	public static isNumeric(value: string): boolean {
+		value = PStrUtils.isEmpty(value) ? "" : value;
+		return value.match(/^[0-9]+$/) != null;
+	}
+
 	public static replaceStr(source: string, find: string, replaceWith: any): string {
 		return source.replace(find, String(replaceWith));
 	}

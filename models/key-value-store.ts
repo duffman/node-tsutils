@@ -27,7 +27,7 @@ export class KeyValueStore {
 
 	public getAsStr(key: string): string {
 		let strValalue: string = "";
-		let value = this.dict.getValue(key);
+		let value = this.dict.get(key);
 		if (value instanceof String) {
 			strValalue = value as string;
 		}

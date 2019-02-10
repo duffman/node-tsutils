@@ -16,11 +16,39 @@
 
  =----------------------------------------------------------------= */
 
-import {PValueTypeNames, PVarType, PVarTypeToStr} from '@putte/pvar-types';
+import { CliCommander }           from '@cli/cli.commander';
+import { PValueTypeNames }        from '@putte/pvar-types';
+import { PVarType }               from '@putte/pvar-types';
 
-const UNDEF = undefined;
+const UNDEF = undefined || null;
 
 export class PVarUtils {
+
+	public static isNothing(value: any): boolean {
+		return value ? true: false;
+	}
+
+	public static isNullOrUndefined(value: any): boolean {
+		return value === null || value === undefined;
+	}
+
+	public static isNumber(value: any): boolean {
+		return typeof value === "number";
+	}
+
+	public static isValidNumber(value: any): boolean {
+		let result = false;
+		if (value !== null) {
+			let strVal = value.toString();
+			let numVal = parseFloat(strVal);
+
+			result = PVarUtils.isNumber(numVal);
+		}
+
+		return result;
+	}
+
+
 	public static isBoolFalse(value: any): boolean {
 		return value ? true: false;
 	}
@@ -103,4 +131,12 @@ export class PVarUtils {
 	public static noValue(input: any): boolean {
 		return false;
 	}
+}
+
+if (CliCommander.haveArgs()) {
+	console.log("OUTSIDE CODE EXECUTING");
+	console.log("Test1 ::", PVarUtils.isNumber("123"));
+	console.log("Test2 ::", PVarUtils.isNumber(null));
+	console.log("Test3 ::", PVarUtils.isNumber(123.34));
+	console.log("Test4 ::", PVarUtils.isNumber(1));
 }
