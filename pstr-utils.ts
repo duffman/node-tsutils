@@ -43,7 +43,7 @@ export class PStrUtils {
 
 	public static replaceEx = function (originalString: string, oldValue: string, newValue: string, ignoreCase: boolean = false) {
 		//
-		// if invalid data, return the original string
+		// if invalid vendorBaskets, return the original string
 		//
 		if ((originalString == null) || (oldValue == null) || (newValue == null) || (oldValue.length == 0))
 			return (originalString);

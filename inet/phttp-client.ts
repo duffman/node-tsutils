@@ -109,7 +109,6 @@ export class PHttpClient {
 		return result;
 	}
 
-
 	/**
 	 * Retrieves the source of a given URL, it will detect
 	 * Url type to seamlessly support both HTTP & HTTPS
